@@ -1,0 +1,1542 @@
+/**
+ * Quezon Care Custom Styles
+ * Additional styles and animations - SHADCN/UI + SMOOTH ANIMATIONS
+ *
+ * @package Quezon_Care
+ */
+
+/* ==========================================================================
+   GLOBAL SMOOTH TRANSITIONS
+   ========================================================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ==========================================================================
+   SHADCN ANIMATION KEYFRAMES
+   ========================================================================== */
+@keyframes fadeInUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(40px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes scaleIn {
+    from { 
+        opacity: 0; 
+        transform: scale(0.9); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+}
+
+/* ==========================================================================
+   SHADCN ANIMATION CLASSES
+   ========================================================================== */
+
+/* Fade In Up Animation */
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Elements waiting to animate */
+.shadcn-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.shadcn-animate.animate-fadeInUp {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Skeleton Loader (shadcn style) */
+.shadcn-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 12px;
+}
+
+/* Float animation for decorative elements */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   GLASSMORPHISM COMPONENTS (shadcn/ui inspired)
+   ========================================================================== */
+
+/* Glass Card - Core Component */
+.glass-card,
+.shadcn-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.glass-card:hover,
+.shadcn-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* 3D tilt effect on hover */
+.shadcn-card:hover {
+    transform: perspective(1000px) rotateX(2deg) translateY(-8px);
+}
+
+/* Section Padding */
+.section-pad {
+    padding: 6rem 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Gradient Backgrounds */
+.gradient-bg {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #ccfbf1 100%);
+}
+
+.gradient-bg-alt {
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+}
+
+/* Hero Button with enhanced interactions */
+.hero-btn,
+.shadcn-button-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%);
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-btn:hover,
+.shadcn-button-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+}
+
+.hero-btn:active,
+.shadcn-button-primary:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Button shine effect */
+.hero-btn::before,
+.shadcn-button-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.hero-btn:hover::before,
+.shadcn-button-primary:hover::before {
+    left: 100%;
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Testimonial Card */
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    padding: 3rem 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   RIPPLE EFFECT (shadcn/ui style)
+   ========================================================================== */
+.ripple-effect {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: ripple 0.6s linear forwards;
+}
+
+@keyframes ripple {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   STAGGER ANIMATION DELAYS
+   ========================================================================== */
+[data-aos]:nth-child(1) { transition-delay: 0ms !important; }
+[data-aos]:nth-child(2) { transition-delay: 100ms !important; }
+[data-aos]:nth-child(3) { transition-delay: 200ms !important; }
+[data-aos]:nth-child(4) { transition-delay: 300ms !important; }
+[data-aos]:nth-child(5) { transition-delay: 400ms !important; }
+[data-aos]:nth-child(6) { transition-delay: 500ms !important; }
+
+/* ==========================================================================
+   ENHANCED HEADER ANIMATIONS
+   ========================================================================== */
+.site-header {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.site-header.scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   SCROLL REVEAL ENHANCEMENTS
+   ========================================================================== */
+/* Initial state for AOS animations - smoother entry */
+[data-aos] {
+    will-change: transform, opacity;
+}
+
+[data-aos="fade-up"] {
+    transform: translateY(40px);
+}
+
+[data-aos="fade-down"] {
+    transform: translateY(-40px);
+}
+
+[data-aos="fade-left"] {
+    transform: translateX(40px);
+}
+
+[data-aos="fade-right"] {
+    transform: translateX(-40px);
+}
+
+[data-aos="zoom-in"] {
+    transform: scale(0.9);
+}
+
+/* After animation */
+[data-aos].aos-animate {
+    transform: translateY(0) translateX(0) scale(1);
+}
+
+/* ==========================================================================
+   LINK & BUTTON MICRO-INTERACTIONS
+   ========================================================================== */
+a, button {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Service link arrow animation */
+.service-link i {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.service-link:hover i {
+    transform: translateX(5px);
+}
+
+/* Read more link animation */
+.read-more i {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.read-more:hover i {
+    transform: translateX(5px);
+}
+
+/* ==========================================================================
+   IMAGE REVEAL ANIMATIONS
+   ========================================================================== */
+.blog-card img,
+.staff-card img,
+.service-card img {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.blog-card:hover img,
+.staff-card:hover img,
+.service-card:hover img {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   HERO FLOATING ELEMENTS ANIMATION
+   ========================================================================== */
+.hero-floating-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-floating-card.card-1 {
+    animation-delay: 0s;
+}
+
+.hero-floating-card.card-2 {
+    animation-delay: 2s;
+}
+
+/* Decorative blobs animation */
+.hero::before,
+.hero::after {
+    animation: blobMove 15s ease-in-out infinite alternate;
+}
+
+@keyframes blobMove {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+}
+
+/* ==========================================================================
+   LOADING SKELETON (shadcn style)
+   ========================================================================== */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+.skeleton-text {
+    height: 1rem;
+    width: 80%;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-heading {
+    height: 1.5rem;
+    width: 60%;
+    margin-bottom: 1rem;
+}
+
+.skeleton-image {
+    height: 200px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   SMOOTH PAGE TRANSITIONS
+   ========================================================================== */
+body {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+body.page-loading {
+    opacity: 0;
+}
+
+/* Page loaded state */
+body.page-loaded .hero-content,
+body.page-loaded .hero-image {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Focus Styles - Clean, Subtle Outlines
+   ========================================================================== */
+/* Remove default blue outline and add custom focus styles */
+*:focus {
+    outline: none;
+}
+
+/* Accessible focus for keyboard users only */
+*:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* Remove focus outline for mouse clicks */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Buttons get subtle shadow instead of outline on focus */
+.btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.3);
+}
+
+/* ==========================================================================
+   Global Enhancements
+   ========================================================================== */
+
+/* Smooth selection colors */
+::selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Better text rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary-color), var(--primary-dark));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* ==========================================================================
+   Page Hero Enhancement
+   ========================================================================== */
+.page-hero {
+    background: var(--gradient-hero);
+    padding: 8rem 0 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 15% 85%, rgba(255,255,255,0.04) 0%, transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.06) 0%, transparent 35%);
+    pointer-events: none;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--bg-white);
+    clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+.page-hero h1 {
+    color: white;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    margin-bottom: 0.75rem;
+    position: relative;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-hero > p,
+.page-hero .container > p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+}
+
+.page-hero .breadcrumb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    position: relative;
+}
+
+.page-hero .breadcrumb a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.page-hero .breadcrumb a:hover {
+    color: white;
+}
+
+.page-hero .breadcrumb .separator {
+    opacity: 0.5;
+}
+
+.page-hero .breadcrumb .current {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   Section Label Enhancement
+   ========================================================================== */
+.section-label {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(0, 119, 182, 0.1) 0%, rgba(0, 180, 216, 0.1) 100%);
+    color: var(--primary-color);
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0, 119, 182, 0.15);
+}
+
+/* ==========================================================================
+   Page Load Animation
+   ========================================================================== */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   Additional Animations
+   ========================================================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ==========================================================================
+   Scroll Animation Classes
+   ========================================================================== */
+.animate-ready {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, 
+                transform 0.8s ease-out;
+}
+
+.animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Hero Animations - Smooth */
+.hero-content {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 1s ease-out,
+                transform 1s ease-out;
+}
+
+.hero-content.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hero-image {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 1s ease-out 0.3s,
+                transform 1s ease-out 0.3s;
+}
+
+.hero-image.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Floating Card Animations - Gentle */
+.hero-floating-card {
+    animation: float 4s ease-in-out infinite;
+}
+
+.hero-floating-card.card-1 {
+    animation-delay: 0s;
+}
+
+.hero-floating-card.card-2 {
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* ==========================================================================
+   Enhanced Hover Effects
+   ========================================================================== */
+
+/* Service Cards - Soft hover */
+.service-card {
+    transition: transform 0.5s ease-out,
+                box-shadow 0.5s ease-out;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -15px rgba(0, 119, 182, 0.2);
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.05);
+    background: var(--primary-color);
+}
+
+.service-card:hover .service-icon i {
+    color: var(--bg-white);
+}
+
+.service-card .service-icon {
+    transition: transform 0.5s ease-out,
+                background 0.5s ease-out;
+}
+
+.service-card .service-icon i {
+    transition: color 0.5s ease-out;
+}
+
+.service-card .service-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card .service-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.4s ease-out;
+}
+
+.service-card:hover .service-link::after {
+    width: 100%;
+}
+
+.service-card:hover .service-link i {
+    transform: translateX(4px);
+}
+
+.service-card .service-link i {
+    transition: transform 0.4s ease-out;
+}
+
+/* Buttons - Subtle hover */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease-out;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out,
+                height 0.6s ease-out;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 119, 182, 0.25);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-secondary:hover {
+    background: var(--accent-hover);
+}
+
+/* Nav Links - Gentle underline */
+.nav-menu a {
+    position: relative;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all 0.4s ease-out;
+    transform: translateX(-50%);
+}
+
+.nav-menu a:hover::after,
+.nav-menu .current-menu-item a::after {
+    width: 100%;
+}
+
+/* About Features - Gentle slide */
+.about-feature {
+    transition: transform 0.4s ease-out,
+                background 0.4s ease-out;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+}
+
+.about-feature:hover {
+    transform: translateX(6px);
+    background: rgba(0, 119, 182, 0.03);
+}
+
+.about-feature i {
+    transition: transform 0.4s ease-out,
+                color 0.4s ease-out;
+}
+
+.about-feature:hover i {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+/* Trust Badges - Soft lift */
+.trust-badge {
+    transition: transform 0.4s ease-out,
+                box-shadow 0.4s ease-out;
+}
+
+.trust-badge:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.trust-badge-icon {
+    transition: transform 0.4s ease-out,
+                background 0.4s ease-out;
+}
+
+.trust-badge:hover .trust-badge-icon {
+    transform: scale(1.05);
+    background: var(--primary-color);
+}
+
+.trust-badge:hover .trust-badge-icon i {
+    color: var(--bg-white);
+}
+
+/* Testimonial Cards - Gentle scale */
+.testimonial-card {
+    transition: transform 0.4s ease-out,
+                box-shadow 0.4s ease-out;
+}
+
+.testimonial-card:hover {
+    transform: scale(1.01);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Footer Links - Subtle slide */
+.footer-links a {
+    position: relative;
+    transition: color 0.3s ease-out, padding-left 0.3s ease-out;
+}
+
+.footer-links a:hover {
+    color: var(--primary-light);
+    padding-left: 4px;
+}
+
+/* Social Icons - Soft lift */
+.social-links a {
+    transition: transform 0.4s ease-out,
+                background 0.4s ease-out,
+                color 0.4s ease-out;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+    background: var(--primary-color);
+    color: var(--bg-white);
+}
+
+/* Form Inputs Focus Animation - Subtle */
+.wpcf7-form input:focus,
+.wpcf7-form select:focus,
+.wpcf7-form textarea:focus,
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+    /* Remove scale transform for cleaner feel */
+}
+
+/* Image Hover Effects - Gentle */
+.about-image img,
+.hero-image img {
+    transition: transform 0.8s ease-out;
+}
+
+.about-image:hover img {
+    transform: scale(1.03);
+}
+
+/* CTA Section - Subtle background animation */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    animation: ctaPulse 12s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(5%, 5%);
+    }
+}
+
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ==========================================================================
+   Form Enhancements
+   ========================================================================== */
+.wpcf7-form-control.invalid,
+.booking-form input.invalid,
+.booking-form select.invalid,
+.booking-form textarea.invalid {
+    border-color: #E53E3E !important;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1) !important;
+}
+
+.wpcf7-form-control:valid:not(:placeholder-shown),
+.booking-form input:valid:not(:placeholder-shown),
+.booking-form select:valid,
+.booking-form textarea:valid:not(:placeholder-shown) {
+    border-color: var(--success-color);
+}
+
+/* Loading state for submit button */
+.wpcf7-submit.loading,
+.booking-form button[type="submit"].loading {
+    pointer-events: none;
+    opacity: 0.7;
+    position: relative;
+}
+
+.wpcf7-submit.loading::after,
+.booking-form button[type="submit"].loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Contact Form 7 Messages */
+.wpcf7-response-output {
+    margin: 1rem 0 !important;
+    padding: 1rem !important;
+    border-radius: var(--radius-md) !important;
+}
+
+.wpcf7-mail-sent-ok {
+    background: #C6F6D5 !important;
+    border-color: var(--success-color) !important;
+    color: #22543D !important;
+}
+
+.wpcf7-mail-sent-ng,
+.wpcf7-validation-errors {
+    background: #FED7D7 !important;
+    border-color: #E53E3E !important;
+    color: #742A2A !important;
+}
+
+/* ==========================================================================
+   Hero Enhancements
+   ========================================================================== */
+.hero-content {
+    animation: fadeInLeft 0.8s ease forwards;
+}
+
+.hero-image {
+    animation: fadeInRight 0.8s ease 0.3s forwards;
+    opacity: 0;
+}
+
+.hero-floating-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.hero-floating-card i {
+    font-size: 1.25rem;
+}
+
+.hero-floating-card strong {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.hero-floating-card span {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* ==========================================================================
+   Button Enhancements
+   ========================================================================== */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* ==========================================================================
+   Service Card Hover Effects
+   ========================================================================== */
+.service-card .service-icon {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 10px 30px rgba(0, 119, 182, 0.3);
+}
+
+/* ==========================================================================
+   Testimonial Slider Enhancements
+   ========================================================================== */
+.testimonials-track {
+    touch-action: pan-x;
+}
+
+.testimonial-content {
+    position: relative;
+}
+
+.testimonial-content::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: var(--bg-white);
+}
+
+/* ==========================================================================
+   Accessibility Enhancements
+   ========================================================================== */
+.skip-link:focus {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 10000;
+    background: var(--primary-color);
+    color: var(--bg-white);
+    padding: 1rem 2rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    clip: auto;
+    width: auto;
+    height: auto;
+}
+
+/* Focus styles */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Loading Skeleton
+   ========================================================================== */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text {
+    height: 1em;
+    border-radius: 4px;
+    margin-bottom: 0.5em;
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
+
+.skeleton-image {
+    height: 200px;
+    border-radius: var(--radius-md);
+}
+
+/* ==========================================================================
+   Page-specific Styles
+   ========================================================================== */
+
+/* About Page */
+.about-page .about-grid {
+    margin-bottom: var(--spacing-xxl);
+}
+
+.about-page .team-section {
+    margin-top: var(--spacing-xxl);
+}
+
+/* Contact Page */
+.contact-page .contact-form-wrapper {
+    background: var(--bg-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Thank You Page */
+.thank-you-section .thank-you-icon {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+@media print {
+    .site-header,
+    .site-footer,
+    .hero-buttons,
+    .cta-section,
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .hero {
+        min-height: auto;
+        padding: 2rem 0;
+        background: none;
+        color: #000;
+    }
+    
+    .hero h1,
+    .hero-subtitle {
+        color: #000;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+    
+    .service-card {
+        page-break-inside: avoid;
+    }
+}
+
+/* ==========================================================================
+   High Contrast Mode
+   ========================================================================== */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #005A8D;
+        --text-dark: #000000;
+        --text-medium: #333333;
+        --border-color: #666666;
+    }
+    
+    .btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .hero-floating-card {
+        animation: none;
+    }
+    
+    .testimonials-track {
+        transition: none;
+    }
+}
+
+/* ==========================================================================
+   Dark Mode Support (Future)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    /* Dark mode styles can be added here when needed */
+}
+
+/* ==========================================================================
+   Additional Utility Classes
+   ========================================================================== */
+.text-primary { color: var(--primary-color); }
+.text-secondary { color: var(--accent-color); }
+.text-success { color: var(--success-color); }
+.text-white { color: var(--bg-white); }
+.text-dark { color: var(--text-dark); }
+
+.bg-primary { background-color: var(--primary-color); }
+.bg-secondary { background-color: var(--accent-color); }
+.bg-light { background-color: var(--bg-light); }
+.bg-white { background-color: var(--bg-white); }
+
+.rounded { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-full { border-radius: 50%; }
+
+.shadow { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+.flex-wrap { flex-wrap: wrap; }
+.justify-center { justify-content: center; }
+.items-center { align-items: center; }
+.gap-1 { gap: var(--spacing-sm); }
+.gap-2 { gap: var(--spacing-md); }
+.gap-3 { gap: var(--spacing-lg); }
+
+/* ==========================================================================
+   Contact Form 7 - Booking Form Styles
+   ========================================================================== */
+.wpcf7-form {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.wpcf7-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .wpcf7-form .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.wpcf7-form .form-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.wpcf7-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="email"],
+.wpcf7-form input[type="tel"],
+.wpcf7-form input[type="date"],
+.wpcf7-form select,
+.wpcf7-form textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: var(--font-secondary);
+    transition: var(--transition-fast);
+    background: var(--bg-white);
+    margin-top: 0.5rem;
+}
+
+.wpcf7-form input[type="text"]:focus,
+.wpcf7-form input[type="email"]:focus,
+.wpcf7-form input[type="tel"]:focus,
+.wpcf7-form input[type="date"]:focus,
+.wpcf7-form select:focus,
+.wpcf7-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
+}
+
+.wpcf7-form textarea {
+    min-height: 120px;
+    resize: vertical;
+    margin-bottom: 1.5rem;
+}
+
+.wpcf7-form select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234A5568' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.wpcf7-form .wpcf7-acceptance {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.wpcf7-form .wpcf7-acceptance input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.wpcf7-form .wpcf7-acceptance .wpcf7-list-item-label {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    line-height: 1.5;
+}
+
+.wpcf7-form .wpcf7-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: var(--bg-white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    width: 100%;
+}
+
+.wpcf7-form .wpcf7-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.wpcf7-form .wpcf7-spinner {
+    margin-left: 1rem;
+}
+
+.wpcf7-not-valid-tip {
+    color: #E53E3E;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.wpcf7-response-output {
+    margin-top: 1.5rem !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: var(--radius-md) !important;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   LEGAL PAGES (Privacy Policy & Terms of Service)
+   ========================================================================== */
+
+.legal-content .glass-card {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.legal-text h2 {
+    position: relative;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.legal-text h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, #3b82f6 0%, #14b8a6 100%);
+    border-radius: 3px;
+}
+
+.legal-text h3 {
+    color: #1e40af;
+    margin-top: 1.5rem;
+}
+
+.legal-text ul {
+    padding-left: 1.5rem;
+}
+
+.legal-text ul li {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.legal-text ul li::marker {
+    color: #3b82f6;
+}
+
+.legal-text p {
+    line-height: 1.8;
+}
+
+.legal-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Print styles for legal pages */
+@media print {
+    .legal-content {
+        background: white !important;
+    }
+    
+    .glass-card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    .page-hero,
+    .site-header,
+    .site-footer {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-actions {
+        bottom: 1.5rem;
+        right: 1rem;
+    }
+    
+    .floating-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .floating-tooltip {
+        display: none;
+    }
+    
+    .back-to-top {
+        left: 1rem;
+        width: 44px;
+        height: 44px;
+    }
+}

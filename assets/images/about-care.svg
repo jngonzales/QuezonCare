@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="500" viewBox="0 0 600 500">
+  <defs>
+    <linearGradient id="bg-about" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0F9FC"/>
+      <stop offset="100%" style="stop-color:#E0F2F7"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="500" fill="url(#bg-about)" rx="16"/>
+  
+  <!-- Group of caregivers -->
+  
+  <!-- Person 1 (left) -->
+  <circle cx="150" cy="200" r="50" fill="#FDB797"/>
+  <ellipse cx="150" cy="300" rx="60" ry="80" fill="#0077B6"/>
+  <ellipse cx="150" cy="165" rx="40" ry="20" fill="#2C1810"/>
+  <circle cx="135" cy="195" r="5" fill="#333"/>
+  <circle cx="165" cy="195" r="5" fill="#333"/>
+  <path d="M 140 220 Q 150 235 160 220" stroke="#333" stroke-width="2" fill="none"/>
+  
+  <!-- Person 2 (center) -->
+  <circle cx="300" cy="180" r="55" fill="#FDB797"/>
+  <ellipse cx="300" cy="290" rx="70" ry="90" fill="#00B4D8"/>
+  <ellipse cx="300" cy="140" rx="45" ry="22" fill="#8B4513"/>
+  <circle cx="283" cy="175" r="6" fill="#333"/>
+  <circle cx="317" cy="175" r="6" fill="#333"/>
+  <path d="M 285 205 Q 300 220 315 205" stroke="#333" stroke-width="2" fill="none"/>
+  
+  <!-- Person 3 (right) -->
+  <circle cx="450" cy="200" r="50" fill="#FDB797"/>
+  <ellipse cx="450" cy="300" rx="60" ry="80" fill="#48CAE4"/>
+  <ellipse cx="450" cy="165" rx="40" ry="20" fill="#1a1a1a"/>
+  <circle cx="435" cy="195" r="5" fill="#333"/>
+  <circle cx="465" cy="195" r="5" fill="#333"/>
+  <path d="M 440 220 Q 450 235 460 220" stroke="#333" stroke-width="2" fill="none"/>
+  
+  <!-- Medical symbols -->
+  <rect x="125" y="280" width="50" height="30" fill="white" rx="5"/>
+  <text x="150" y="300" font-family="Arial" font-size="14" fill="#0077B6" text-anchor="middle">RN</text>
+  
+  <rect x="275" y="270" width="50" height="30" fill="white" rx="5"/>
+  <text x="300" y="290" font-family="Arial" font-size="14" fill="#00B4D8" text-anchor="middle">LPN</text>
+  
+  <rect x="425" y="280" width="50" height="30" fill="white" rx="5"/>
+  <text x="450" y="300" font-family="Arial" font-size="14" fill="#48CAE4" text-anchor="middle">CNA</text>
+  
+  <!-- Hearts -->
+  <path d="M 300 420 L 280 400 Q 260 375 285 355 Q 300 345 300 365 Q 300 345 315 355 Q 340 375 320 400 Z" fill="#FF6B35"/>
+  
+  <!-- Text -->
+  <text x="300" y="470" font-family="Arial, sans-serif" font-size="20" fill="#0077B6" text-anchor="middle">Our Caring Team</text>
+</svg>

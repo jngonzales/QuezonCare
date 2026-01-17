@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0077B6"/>
+      <stop offset="100%" style="stop-color:#00B4D8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bg-gradient)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="80" fill="white" opacity="0.95"/>
+  <text x="50" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#0077B6">Quezon<tspan fill="#FF6B35">Care</tspan></text>
+  
+  <!-- Navigation -->
+  <text x="500" y="50" font-family="Arial, sans-serif" font-size="16" fill="#333">Home</text>
+  <text x="580" y="50" font-family="Arial, sans-serif" font-size="16" fill="#333">Services</text>
+  <text x="680" y="50" font-family="Arial, sans-serif" font-size="16" fill="#333">About</text>
+  <text x="760" y="50" font-family="Arial, sans-serif" font-size="16" fill="#333">Contact</text>
+  
+  <!-- CTA Button -->
+  <rect x="900" y="25" width="200" height="40" rx="8" fill="#0077B6"/>
+  <text x="940" y="52" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Book Consultation</text>
+  
+  <!-- Hero Section -->
+  <text x="80" y="250" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white">24/7 In-Home Care</text>
+  <text x="80" y="310" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white">You Can Trust</text>
+  <text x="80" y="370" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.9)">Professional nursing + companion care in Quezon City</text>
+  
+  <!-- Hero Buttons -->
+  <rect x="80" y="420" width="220" height="50" rx="8" fill="#FF6B35"/>
+  <text x="110" y="452" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Book Free Consultation</text>
+  
+  <rect x="320" y="420" width="150" height="50" rx="8" fill="white"/>
+  <text x="355" y="452" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0077B6">Our Services</text>
+  
+  <!-- Stats -->
+  <text x="100" y="550" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white">10+</text>
+  <text x="100" y="580" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Years Experience</text>
+  
+  <text x="250" y="550" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white">500+</text>
+  <text x="250" y="580" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Families Served</text>
+  
+  <text x="400" y="550" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white">50+</text>
+  <text x="400" y="580" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Care Specialists</text>
+  
+  <!-- Hero Image Placeholder -->
+  <rect x="700" y="150" width="450" height="350" rx="16" fill="white" opacity="0.2"/>
+  <text x="850" y="340" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">Caregiver Image</text>
+  
+  <!-- Services Section -->
+  <rect x="0" y="650" width="1200" height="250" fill="white"/>
+  <text x="600" y="700" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#0077B6" text-anchor="middle">OUR SERVICES</text>
+  <text x="600" y="740" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1A1A2E" text-anchor="middle">Comprehensive Home Care Solutions</text>
+  
+  <!-- Service Cards -->
+  <rect x="50" y="780" width="250" height="100" rx="12" fill="#F7FAFC" stroke="#E2E8F0"/>
+  <circle cx="100" cy="830" r="25" fill="#0077B6"/>
+  <text x="140" y="825" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1A1A2E">Nursing Care</text>
+  <text x="140" y="845" font-family="Arial, sans-serif" font-size="12" fill="#718096">Professional RN/LPN care</text>
+  
+  <rect x="325" y="780" width="250" height="100" rx="12" fill="#F7FAFC" stroke="#E2E8F0"/>
+  <circle cx="375" cy="830" r="25" fill="#0077B6"/>
+  <text x="415" y="825" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1A1A2E">Elderly Companion</text>
+  <text x="415" y="845" font-family="Arial, sans-serif" font-size="12" fill="#718096">Daily support & activities</text>
+  
+  <rect x="600" y="780" width="250" height="100" rx="12" fill="#F7FAFC" stroke="#E2E8F0"/>
+  <circle cx="650" cy="830" r="25" fill="#0077B6"/>
+  <text x="690" y="825" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1A1A2E">Post-Surgery</text>
+  <text x="690" y="845" font-family="Arial, sans-serif" font-size="12" fill="#718096">Recovery assistance</text>
+  
+  <rect x="875" y="780" width="250" height="100" rx="12" fill="#F7FAFC" stroke="#E2E8F0"/>
+  <circle cx="925" cy="830" r="25" fill="#0077B6"/>
+  <text x="965" y="825" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1A1A2E">Dementia Care</text>
+  <text x="965" y="845" font-family="Arial, sans-serif" font-size="12" fill="#718096">Specialized memory care</text>
+</svg>

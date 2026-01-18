@@ -49,10 +49,18 @@ if (!function_exists('quezon_care_display_contact_form')) {
 
 get_header();
 
-$phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
-$email = quezon_care_get_option('email', 'care@quezonhomecare.ph');
-$address = quezon_care_get_option('address', '123 Katipunan Ave, Quezon City, Philippines');
-$hours = quezon_care_get_option('hours', '24/7 Service Available');
+// Get options safely with fallbacks
+$phone = '+63 (02) 8123-4567';
+$email = 'care@quezonhomecare.ph';
+$address = '123 Katipunan Ave, Quezon City, Philippines';
+$hours = '24/7 Service Available';
+
+if (function_exists('quezon_care_get_option')) {
+    $phone = quezon_care_get_option('phone', $phone);
+    $email = quezon_care_get_option('email', $email);
+    $address = quezon_care_get_option('address', $address);
+    $hours = quezon_care_get_option('hours', $hours);
+}
 ?>
 
 <!-- Page Header -->
@@ -131,7 +139,7 @@ $hours = quezon_care_get_option('hours', '24/7 Service Available');
                         );
                         
                         foreach ($social_links as $network => $icon) :
-                            $url = quezon_care_get_option($network);
+                            $url = function_exists('quezon_care_get_option') ? quezon_care_get_option($network) : '';
                             if ($url) :
                                 ?>
                                 <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr(ucfirst($network)); ?>">

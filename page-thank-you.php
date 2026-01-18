@@ -10,7 +10,10 @@
 
 get_header();
 
-$phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
+$phone = '+63 (02) 8123-4567';
+if (function_exists('quezon_care_get_option')) {
+    $phone = quezon_care_get_option('phone', $phone);
+}
 ?>
 
 <!-- Thank You Section -->

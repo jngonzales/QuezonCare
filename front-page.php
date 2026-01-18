@@ -7,8 +7,11 @@
 
 get_header();
 
-// Get theme options
-$phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
+// Get theme options with fallback
+$phone = '+63 (02) 8123-4567';
+if (function_exists('quezon_care_get_option')) {
+    $phone = quezon_care_get_option('phone', $phone);
+}
 ?>
 
 <!-- Hero Section -->
@@ -82,10 +85,10 @@ $phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
         
         <div class="services-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <?php
-            $services = quezon_care_get_services(4);
+            $services = function_exists('quezon_care_get_services') ? quezon_care_get_services(4) : null;
             $service_index = 0;
             
-            if ($services->have_posts()) :
+            if ($services && $services->have_posts()) :
                 while ($services->have_posts()) : $services->the_post();
                     $icon = get_post_meta(get_the_ID(), '_service_icon', true);
                     $icon = $icon ? $icon : 'fa-heart';
@@ -231,9 +234,9 @@ $phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
         <div class="testimonials-slider" id="testimonials-slider" data-aos="fade-up" data-aos-delay="200">
             <div class="testimonials-track">
                 <?php
-                $testimonials = quezon_care_get_testimonials(3);
+                $testimonials = function_exists('quezon_care_get_testimonials') ? quezon_care_get_testimonials(3) : null;
                 
-                if ($testimonials->have_posts()) :
+                if ($testimonials && $testimonials->have_posts()) :
                     while ($testimonials->have_posts()) : $testimonials->the_post();
                         $position = get_post_meta(get_the_ID(), '_testimonial_position', true);
                         $rating = get_post_meta(get_the_ID(), '_testimonial_rating', true);

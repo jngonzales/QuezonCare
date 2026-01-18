@@ -86,7 +86,11 @@ if (!function_exists('quezon_care_display_default_booking_form')) {
 
 get_header();
 
-$phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
+// Get phone number safely
+$phone = '+63 (02) 8123-4567';
+if (function_exists('quezon_care_get_option')) {
+    $phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
+}
 ?>
 
 <!-- Page Header -->

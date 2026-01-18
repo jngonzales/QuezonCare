@@ -193,5 +193,4 @@ if (function_exists('quezon_care_get_option')) {
     </div>
 </section>
 
-get_footer();
-?>
+<?php get_footer(); ?>

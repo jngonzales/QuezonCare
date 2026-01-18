@@ -8,6 +8,45 @@
  * @package Quezon_Care
  */
 
+/**
+ * Display contact form
+ */
+if (!function_exists('quezon_care_display_contact_form')) {
+    function quezon_care_display_contact_form() {
+        ?>
+        <form class="contact-form" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+            <input type="hidden" name="action" value="quezon_care_contact">
+            <?php wp_nonce_field('quezon_care_contact_nonce', 'contact_nonce'); ?>
+            
+            <div class="form-group">
+                <label for="contact_name"><?php esc_html_e('Your Name', 'quezon-care'); ?> <span class="required">*</span></label>
+                <input type="text" id="contact_name" name="contact_name" placeholder="Your Name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+            </div>
+            
+            <div class="form-group">
+                <label for="contact_email"><?php esc_html_e('Email Address', 'quezon-care'); ?> <span class="required">*</span></label>
+                <input type="email" id="contact_email" name="contact_email" placeholder="your@email.com" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+            </div>
+            
+            <div class="form-group">
+                <label for="contact_subject"><?php esc_html_e('Subject', 'quezon-care'); ?></label>
+                <input type="text" id="contact_subject" name="contact_subject" placeholder="How can we help?" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+            </div>
+            
+            <div class="form-group">
+                <label for="contact_message"><?php esc_html_e('Message', 'quezon-care'); ?> <span class="required">*</span></label>
+                <textarea id="contact_message" name="contact_message" rows="5" placeholder="Tell us about your needs..." required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"></textarea>
+            </div>
+            
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold py-4 px-8 rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                <i class="fas fa-paper-plane mr-2"></i>
+                <?php esc_html_e('Send Message', 'quezon-care'); ?>
+            </button>
+        </form>
+        <?php
+    }
+}
+
 get_header();
 
 $phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
@@ -151,53 +190,5 @@ $hours = quezon_care_get_option('hours', '24/7 Service Available');
 </section>
 
 <?php
-/**
- * Display contact form
- */
-function quezon_care_display_contact_form() {
-    ?>
-    <form class="contact-form" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-        <input type="hidden" name="action" value="quezon_care_contact">
-        <?php wp_nonce_field('quezon_care_contact_nonce', 'contact_nonce'); ?>
-        
-        <div class="form-group">
-            <label for="contact_name">
-                <?php esc_html_e('Your Name', 'quezon-care'); ?>
-                <span class="required">*</span>
-            </label>
-            <input type="text" id="contact_name" name="contact_name" required class="wpcf7-form-control">
-        </div>
-        
-        <div class="form-group">
-            <label for="contact_email">
-                <?php esc_html_e('Email Address', 'quezon-care'); ?>
-                <span class="required">*</span>
-            </label>
-            <input type="email" id="contact_email" name="contact_email" required class="wpcf7-form-control">
-        </div>
-        
-        <div class="form-group">
-            <label for="contact_subject">
-                <?php esc_html_e('Subject', 'quezon-care'); ?>
-            </label>
-            <input type="text" id="contact_subject" name="contact_subject" class="wpcf7-form-control">
-        </div>
-        
-        <div class="form-group">
-            <label for="contact_message">
-                <?php esc_html_e('Message', 'quezon-care'); ?>
-                <span class="required">*</span>
-            </label>
-            <textarea id="contact_message" name="contact_message" rows="5" required class="wpcf7-form-control wpcf7-textarea"></textarea>
-        </div>
-        
-        <button type="submit" class="wpcf7-submit">
-            <i class="fas fa-paper-plane"></i>
-            <?php esc_html_e('Send Message', 'quezon-care'); ?>
-        </button>
-    </form>
-    <?php
-}
-
 get_footer();
 ?>

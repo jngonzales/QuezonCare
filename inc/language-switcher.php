@@ -320,34 +320,32 @@ function quezon_care_language_switcher_script() {
     ?>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Language dropdown toggle
+        // Language dropdown toggle - using 'active' class
         const langSwitchers = document.querySelectorAll('.language-dropdown');
         
         langSwitchers.forEach(function(switcher) {
             const toggle = switcher.querySelector('.lang-toggle');
             const menu = switcher.querySelector('.lang-menu');
-            const chevron = toggle.querySelector('.fa-chevron-down');
+            const chevron = toggle ? toggle.querySelector('.fa-chevron-down') : null;
             
             if (toggle && menu) {
                 toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
                     e.stopPropagation();
-                    const isOpen = menu.classList.contains('opacity-100');
                     
-                    // Close all other dropdowns
-                    document.querySelectorAll('.lang-menu').forEach(function(m) {
-                        m.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                        m.classList.add('opacity-0', 'invisible', 'translate-y-2');
-                    });
-                    document.querySelectorAll('.lang-toggle .fa-chevron-down').forEach(function(c) {
-                        c.classList.remove('rotate-180');
+                    const isOpen = switcher.classList.contains('active');
+                    
+                    // Close all other dropdowns first
+                    document.querySelectorAll('.language-dropdown').forEach(function(s) {
+                        s.classList.remove('active');
                     });
                     
+                    // Toggle current dropdown
                     if (!isOpen) {
-                        menu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
-                        menu.classList.add('opacity-100', 'visible', 'translate-y-0');
-                        if (chevron) chevron.classList.add('rotate-180');
+                        switcher.classList.add('active');
                         toggle.setAttribute('aria-expanded', 'true');
                     } else {
+                        switcher.classList.remove('active');
                         toggle.setAttribute('aria-expanded', 'false');
                     }
                 });
@@ -355,17 +353,25 @@ function quezon_care_language_switcher_script() {
         });
         
         // Close dropdowns when clicking outside
-        document.addEventListener('click', function() {
-            document.querySelectorAll('.lang-menu').forEach(function(menu) {
-                menu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                menu.classList.add('opacity-0', 'invisible', 'translate-y-2');
-            });
-            document.querySelectorAll('.lang-toggle .fa-chevron-down').forEach(function(chevron) {
-                chevron.classList.remove('rotate-180');
-            });
-            document.querySelectorAll('.lang-toggle').forEach(function(toggle) {
-                toggle.setAttribute('aria-expanded', 'false');
-            });
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-dropdown')) {
+                document.querySelectorAll('.language-dropdown').forEach(function(switcher) {
+                    switcher.classList.remove('active');
+                    const toggle = switcher.querySelector('.lang-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.language-dropdown').forEach(function(switcher) {
+                    switcher.classList.remove('active');
+                    const toggle = switcher.querySelector('.lang-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                });
+            }
         });
     });
     </script>

@@ -138,7 +138,20 @@ add_action('woocommerce_before_shop_loop_item_title', 'quezon_care_product_thumb
 function quezon_care_product_thumbnail() {
     global $product;
     
-    $placeholder = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop';
+    // Healthcare product placeholder images
+    $healthcare_placeholders = array(
+        'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop', // Pills/medication
+        'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=400&h=400&fit=crop', // Medical device
+        'https://images.unsplash.com/photo-1603398938378-e54eab446dde?w=400&h=400&fit=crop', // First aid
+        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=400&fit=crop', // Medical equipment
+        'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=400&h=400&fit=crop', // Healthcare items
+        'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=400&fit=crop', // Medical supplies
+    );
+    
+    // Select a consistent placeholder based on product ID
+    $placeholder_index = $product->get_id() % count($healthcare_placeholders);
+    $placeholder = $healthcare_placeholders[$placeholder_index];
+    
     $image_id = $product->get_image_id();
     
     if ($image_id) {
@@ -148,11 +161,16 @@ function quezon_care_product_thumbnail() {
     }
     
     echo '<div class="product-thumbnail-wrapper relative overflow-hidden rounded-2xl mb-4 aspect-square">';
-    echo '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($product->get_name()) . '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">';
+    echo '<img src="' . esc_url($image_url) . '" alt="' . esc_attr($product->get_name()) . '" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">';
     
     // Sale badge
     if ($product->is_on_sale()) {
-        echo '<span class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">' . esc_html__('SALE', 'quezon-care') . '</span>';
+        echo '<span class="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">' . esc_html__('SALE', 'quezon-care') . '</span>';
+    }
+    
+    // Out of stock badge
+    if (!$product->is_in_stock()) {
+        echo '<span class="absolute top-4 left-4 bg-gray-800 text-white text-xs font-bold px-3 py-1.5 rounded-full">' . esc_html__('Out of Stock', 'quezon-care') . '</span>';
     }
     
     echo '</div>';
@@ -181,11 +199,11 @@ function quezon_care_add_cart_icon($items, $args) {
         $cart_count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
         $cart_url = wc_get_cart_url();
         
-        $cart_icon = '<li class="menu-item cart-icon-wrapper ml-4">';
-        $cart_icon .= '<a href="' . esc_url($cart_url) . '" class="cart-icon relative flex items-center text-gray-700 hover:text-blue-600 transition-colors">';
-        $cart_icon .= '<i class="fas fa-shopping-cart text-xl"></i>';
+        $cart_icon = '<li class="menu-item cart-icon-wrapper">';
+        $cart_icon .= '<a href="' . esc_url($cart_url) . '" class="wc-cart-icon" title="' . esc_attr__('View Cart', 'quezon-care') . '">';
+        $cart_icon .= '<i class="fas fa-shopping-cart"></i>';
         if ($cart_count > 0) {
-            $cart_icon .= '<span class="cart-count absolute -top-2 -right-2 bg-blue-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">' . esc_html($cart_count) . '</span>';
+            $cart_icon .= '<span class="wc-cart-count">' . esc_html($cart_count) . '</span>';
         }
         $cart_icon .= '</a>';
         $cart_icon .= '</li>';
@@ -209,9 +227,9 @@ function quezon_care_cart_fragments($fragments) {
     
     ob_start();
     ?>
-    <span class="cart-count absolute -top-2 -right-2 bg-blue-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"><?php echo esc_html($cart_count); ?></span>
+    <span class="wc-cart-count"><?php echo esc_html($cart_count); ?></span>
     <?php
-    $fragments['.cart-count'] = ob_get_clean();
+    $fragments['.wc-cart-count'] = ob_get_clean();
     
     return $fragments;
 }

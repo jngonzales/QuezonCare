@@ -574,6 +574,235 @@
             $('.hero-content').addClass('animate-in');
             $('.hero-image').addClass('animate-in');
         }, 100);
+        
+        // Initialize AJAX filtering
+        initAjaxFiltering();
+        
+        // Initialize REST API features
+        initRestApiFeatures();
     });
+
+    /**
+     * AJAX Filtering for Services & Staff
+     * @since 1.1.0
+     */
+    function initAjaxFiltering() {
+        // Service search/filter
+        const $serviceSearch = $('#service-search');
+        const $serviceCategory = $('#service-category');
+        const $servicesGrid = $('#services-grid');
+        
+        if ($serviceSearch.length || $serviceCategory.length) {
+            let searchTimeout;
+            
+            // Debounced search
+            $serviceSearch.on('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(function() {
+                    filterServices();
+                }, 300);
+            });
+            
+            // Category filter
+            $serviceCategory.on('change', function() {
+                filterServices();
+            });
+            
+            function filterServices() {
+                const search = $serviceSearch.val() || '';
+                const category = $serviceCategory.val() || '';
+                
+                $servicesGrid.addClass('loading');
+                
+                $.ajax({
+                    url: quezonCare.ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'filter_services',
+                        nonce: quezonCare.nonce,
+                        search: search,
+                        category: category
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $servicesGrid.html(response.data.html);
+                            // Reinitialize AOS for new elements
+                            if (typeof AOS !== 'undefined') {
+                                AOS.refresh();
+                            }
+                        }
+                    },
+                    complete: function() {
+                        $servicesGrid.removeClass('loading');
+                    }
+                });
+            }
+        }
+        
+        // Staff filter
+        const $staffSpecialty = $('#staff-specialty');
+        const $staffAvailable = $('#staff-available');
+        const $staffGrid = $('#staff-grid');
+        
+        if ($staffSpecialty.length || $staffAvailable.length) {
+            $staffSpecialty.add($staffAvailable).on('change', function() {
+                filterStaff();
+            });
+            
+            function filterStaff() {
+                const specialty = $staffSpecialty.val() || '';
+                const available = $staffAvailable.val() || '';
+                
+                $staffGrid.addClass('loading');
+                
+                $.ajax({
+                    url: quezonCare.ajaxurl,
+                    type: 'POST',
+                    data: {
+                        action: 'filter_staff',
+                        nonce: quezonCare.nonce,
+                        specialty: specialty,
+                        available: available
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $staffGrid.html(response.data.html);
+                            if (typeof AOS !== 'undefined') {
+                                AOS.refresh();
+                            }
+                        }
+                    },
+                    complete: function() {
+                        $staffGrid.removeClass('loading');
+                    }
+                });
+            }
+        }
+    }
+
+    /**
+     * REST API Features
+     * @since 1.1.0
+     */
+    function initRestApiFeatures() {
+        // Pricing Calculator
+        const $pricingCalc = $('#pricing-calculator');
+        
+        if ($pricingCalc.length && typeof quezonCareAPI !== 'undefined') {
+            const $service = $('#calc-service');
+            const $hours = $('#calc-hours');
+            const $days = $('#calc-days');
+            const $result = $('#pricing-result');
+            
+            function calculatePricing() {
+                const service = $service.val();
+                const hours = parseInt($hours.val()) || 8;
+                const days = parseInt($days.val()) || 5;
+                
+                if (!service) return;
+                
+                $result.addClass('loading');
+                
+                $.ajax({
+                    url: quezonCareAPI.root + 'pricing/calculate',
+                    type: 'POST',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('X-WP-Nonce', quezonCareAPI.nonce);
+                    },
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        service: service,
+                        hours_per_day: hours,
+                        days_per_week: days
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            const data = response.data;
+                            let html = '<div class="pricing-breakdown">';
+                            html += '<div class="price-item"><span>Daily:</span> <strong>' + data.formatted.daily + '</strong></div>';
+                            html += '<div class="price-item"><span>Weekly:</span> <strong>' + data.formatted.weekly + '</strong></div>';
+                            html += '<div class="price-item total"><span>Monthly:</span> <strong>' + data.formatted.monthly + '</strong></div>';
+                            if (data.discount_percent > 0) {
+                                html += '<div class="price-discount text-green-600">You save ' + data.discount_percent + '%!</div>';
+                            }
+                            html += '</div>';
+                            $result.html(html);
+                        }
+                    },
+                    complete: function() {
+                        $result.removeClass('loading');
+                    }
+                });
+            }
+            
+            $service.add($hours).add($days).on('change input', function() {
+                calculatePricing();
+            });
+            
+            // Initial calculation
+            if ($service.val()) {
+                calculatePricing();
+            }
+        }
+        
+        // Load testimonials via API (for infinite scroll)
+        const $testimonialsContainer = $('#testimonials-api');
+        
+        if ($testimonialsContainer.length && typeof quezonCareAPI !== 'undefined') {
+            let page = 1;
+            const perPage = 3;
+            
+            function loadTestimonials() {
+                $.ajax({
+                    url: quezonCareAPI.root + 'testimonials',
+                    type: 'GET',
+                    data: {
+                        per_page: perPage,
+                        page: page
+                    },
+                    success: function(response) {
+                        if (response.success && response.data.length) {
+                            response.data.forEach(function(testimonial) {
+                                const html = createTestimonialCard(testimonial);
+                                $testimonialsContainer.append(html);
+                            });
+                            
+                            if (typeof AOS !== 'undefined') {
+                                AOS.refresh();
+                            }
+                        }
+                    }
+                });
+            }
+            
+            function createTestimonialCard(testimonial) {
+                let stars = '';
+                for (let i = 0; i < 5; i++) {
+                    stars += i < testimonial.rating ? '<i class="fas fa-star text-yellow-400"></i>' : '<i class="far fa-star text-gray-300"></i>';
+                }
+                
+                return `
+                    <div class="testimonial-card glass-card bg-white/80 backdrop-blur-xl rounded-3xl p-8" data-aos="fade-up">
+                        <div class="stars mb-4">${stars}</div>
+                        <p class="text-gray-600 mb-6">"${testimonial.excerpt}"</p>
+                        <div class="flex items-center gap-4">
+                            <img src="${testimonial.image || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(testimonial.client)}" 
+                                 alt="${testimonial.client}" 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-semibold text-gray-900">${testimonial.client}</h4>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Load more button
+            $('#load-more-testimonials').on('click', function() {
+                page++;
+                loadTestimonials();
+            });
+        }
+    }
 
 })(jQuery);

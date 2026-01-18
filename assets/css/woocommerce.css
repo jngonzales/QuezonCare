@@ -1,0 +1,333 @@
+/**
+ * WooCommerce Custom Styles for Quezon Care Theme
+ * Glassmorphism design matching the theme aesthetic
+ *
+ * @package Quezon_Care
+ * @since 1.1.0
+ */
+
+/* ==========================================================================
+   SHOP PAGE
+   ========================================================================== */
+
+.woocommerce-wrapper {
+    padding-top: 6rem;
+}
+
+/* Page Title */
+.woocommerce-products-header__title {
+    @apply text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center;
+    background: linear-gradient(135deg, #2563eb 0%, #14b8a6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Result Count & Ordering */
+.woocommerce-result-count,
+.woocommerce-ordering {
+    @apply text-gray-600 text-sm mb-6;
+}
+
+.woocommerce-ordering select {
+    @apply px-4 py-2 rounded-xl border border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all;
+}
+
+/* ==========================================================================
+   PRODUCT CARDS
+   ========================================================================== */
+
+.woocommerce ul.products li.product {
+    @apply relative bg-white/80 backdrop-blur-xl border border-white/50 rounded-3xl shadow-xl p-6 transition-all duration-500;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.woocommerce ul.products li.product:hover {
+    @apply shadow-2xl -translate-y-2 border-blue-200/60;
+    transform: translateY(-8px) perspective(1000px) rotateX(2deg);
+}
+
+/* Product Link */
+.woocommerce ul.products li.product a.woocommerce-LoopProduct-link {
+    @apply block;
+}
+
+/* Product Title */
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    @apply text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors;
+}
+
+/* Product Price */
+.woocommerce ul.products li.product .price {
+    @apply text-xl font-bold text-blue-600 mb-4;
+}
+
+.woocommerce ul.products li.product .price del {
+    @apply text-gray-400 text-base font-normal mr-2;
+}
+
+.woocommerce ul.products li.product .price ins {
+    @apply text-red-500 no-underline;
+}
+
+/* Add to Cart Button */
+.woocommerce ul.products li.product .button,
+.woocommerce ul.products li.product a.add_to_cart_button {
+    @apply w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold py-3 px-6 rounded-xl text-center hover:shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-0.5 transition-all duration-300;
+    margin-top: 0 !important;
+}
+
+/* Sale Badge */
+.woocommerce span.onsale {
+    @apply absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10;
+    min-height: auto !important;
+    min-width: auto !important;
+    line-height: normal !important;
+}
+
+/* ==========================================================================
+   SINGLE PRODUCT
+   ========================================================================== */
+
+.woocommerce div.product {
+    @apply bg-white/80 backdrop-blur-xl border border-white/50 rounded-3xl shadow-2xl p-8 md:p-12;
+}
+
+/* Product Gallery */
+.woocommerce div.product div.images {
+    @apply rounded-2xl overflow-hidden;
+}
+
+.woocommerce div.product div.images img {
+    @apply rounded-2xl;
+}
+
+/* Product Summary */
+.woocommerce div.product div.summary {
+    @apply p-4;
+}
+
+.woocommerce div.product .product_title {
+    @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+}
+
+.woocommerce div.product p.price {
+    @apply text-2xl font-bold text-blue-600 mb-6;
+}
+
+.woocommerce div.product .woocommerce-product-details__short-description {
+    @apply text-gray-600 mb-6 leading-relaxed;
+}
+
+/* Quantity Input */
+.woocommerce .quantity .qty {
+    @apply w-16 px-3 py-2 rounded-xl border border-gray-200 text-center focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all;
+}
+
+/* Add to Cart Button - Single Product */
+.woocommerce div.product form.cart .button {
+    @apply bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold py-4 px-8 rounded-xl hover:shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-0.5 transition-all duration-300 text-lg;
+}
+
+/* Product Meta */
+.woocommerce div.product .product_meta {
+    @apply text-sm text-gray-500 mt-6 pt-6 border-t border-gray-200;
+}
+
+/* ==========================================================================
+   PRODUCT TABS
+   ========================================================================== */
+
+.woocommerce div.product .woocommerce-tabs {
+    @apply mt-12;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs {
+    @apply flex gap-2 mb-6 border-b-0 p-0;
+    list-style: none;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li {
+    @apply bg-gray-100 rounded-xl px-6 py-3 font-medium text-gray-600 cursor-pointer transition-all;
+    border: none !important;
+    border-radius: 0.75rem !important;
+    margin: 0 !important;
+    padding: 0.75rem 1.5rem !important;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active {
+    @apply bg-gradient-to-r from-blue-600 to-teal-500 text-white;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li a {
+    color: inherit;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+    color: white;
+}
+
+.woocommerce div.product .woocommerce-tabs .panel {
+    @apply bg-gray-50 rounded-2xl p-6;
+}
+
+/* ==========================================================================
+   RELATED PRODUCTS
+   ========================================================================== */
+
+.woocommerce .related.products,
+.woocommerce .upsells.products {
+    @apply mt-16;
+}
+
+.woocommerce .related.products h2,
+.woocommerce .upsells.products h2 {
+    @apply text-2xl font-bold text-gray-900 mb-8;
+}
+
+/* ==========================================================================
+   CART PAGE
+   ========================================================================== */
+
+.woocommerce-cart .woocommerce table.shop_table {
+    @apply rounded-2xl overflow-hidden border-collapse;
+    border: none !important;
+}
+
+.woocommerce-cart .woocommerce table.shop_table th,
+.woocommerce-cart .woocommerce table.shop_table td {
+    @apply px-4 py-4 border-b border-gray-200;
+}
+
+.woocommerce-cart .woocommerce table.shop_table th {
+    @apply bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold;
+}
+
+.woocommerce-cart .cart_item img {
+    @apply w-16 h-16 object-cover rounded-xl;
+}
+
+/* Cart Totals */
+.woocommerce-cart .cart_totals {
+    @apply bg-white/80 backdrop-blur-xl border border-white/50 rounded-3xl shadow-xl p-8 mt-8;
+}
+
+.woocommerce-cart .cart_totals h2 {
+    @apply text-2xl font-bold text-gray-900 mb-6;
+}
+
+.woocommerce-cart .cart_totals .checkout-button {
+    @apply w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all;
+}
+
+/* ==========================================================================
+   CHECKOUT PAGE
+   ========================================================================== */
+
+.woocommerce-checkout .woocommerce-form-coupon-toggle,
+.woocommerce-checkout .woocommerce-form-login-toggle {
+    @apply bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6;
+}
+
+.woocommerce form.checkout {
+    @apply bg-white/80 backdrop-blur-xl border border-white/50 rounded-3xl shadow-xl p-8;
+}
+
+.woocommerce-checkout .form-row label {
+    @apply block text-gray-700 font-medium mb-2;
+}
+
+.woocommerce-checkout .form-row input,
+.woocommerce-checkout .form-row select,
+.woocommerce-checkout .form-row textarea {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all;
+}
+
+.woocommerce-checkout h3 {
+    @apply text-xl font-bold text-gray-900 mb-4 mt-8;
+}
+
+.woocommerce #order_review {
+    @apply bg-gray-50 rounded-2xl p-6 mt-8;
+}
+
+.woocommerce #place_order {
+    @apply w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all;
+}
+
+/* ==========================================================================
+   MESSAGES & NOTICES
+   ========================================================================== */
+
+.woocommerce-message,
+.woocommerce-info {
+    @apply bg-blue-50 border-l-4 border-blue-500 rounded-xl p-4 mb-6 text-blue-800;
+}
+
+.woocommerce-error {
+    @apply bg-red-50 border-l-4 border-red-500 rounded-xl p-4 mb-6 text-red-800;
+}
+
+.woocommerce-message::before,
+.woocommerce-info::before,
+.woocommerce-error::before {
+    color: inherit;
+}
+
+/* ==========================================================================
+   PAGINATION
+   ========================================================================== */
+
+.woocommerce nav.woocommerce-pagination {
+    @apply mt-12;
+}
+
+.woocommerce nav.woocommerce-pagination ul {
+    @apply flex justify-center gap-2;
+    border: none !important;
+}
+
+.woocommerce nav.woocommerce-pagination ul li {
+    @apply border-0;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a,
+.woocommerce nav.woocommerce-pagination ul li span {
+    @apply px-4 py-2 rounded-xl bg-white border border-gray-200 text-gray-600 hover:bg-blue-50 hover:border-blue-500 hover:text-blue-600 transition-all;
+}
+
+.woocommerce nav.woocommerce-pagination ul li span.current {
+    @apply bg-gradient-to-r from-blue-600 to-teal-500 text-white border-transparent;
+}
+
+/* ==========================================================================
+   STAR RATINGS
+   ========================================================================== */
+
+.woocommerce .star-rating {
+    @apply text-yellow-400;
+}
+
+.woocommerce .star-rating span::before {
+    color: #facc15;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .woocommerce ul.products li.product {
+        @apply w-full mb-6;
+    }
+    
+    .woocommerce div.product {
+        @apply p-4;
+    }
+    
+    .woocommerce div.product div.images,
+    .woocommerce div.product div.summary {
+        @apply w-full float-none;
+    }
+}

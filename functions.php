@@ -767,3 +767,28 @@ function quezon_care_rewrite_flush() {
     flush_rewrite_rules();
 }
 add_action('after_switch_theme', 'quezon_care_rewrite_flush');
+
+/**
+ * Include additional functionality modules
+ * @since 1.1.0
+ */
+
+// WooCommerce Integration
+if (file_exists(QUEZON_CARE_DIR . '/inc/woocommerce.php')) {
+    require_once QUEZON_CARE_DIR . '/inc/woocommerce.php';
+}
+
+// REST API Endpoints
+if (file_exists(QUEZON_CARE_DIR . '/inc/rest-api.php')) {
+    require_once QUEZON_CARE_DIR . '/inc/rest-api.php';
+}
+
+// ACF Integration
+if (file_exists(QUEZON_CARE_DIR . '/inc/acf-integration.php')) {
+    require_once QUEZON_CARE_DIR . '/inc/acf-integration.php';
+}
+
+// Language Switcher / i18n
+if (file_exists(QUEZON_CARE_DIR . '/inc/language-switcher.php')) {
+    require_once QUEZON_CARE_DIR . '/inc/language-switcher.php';
+}

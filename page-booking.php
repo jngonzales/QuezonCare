@@ -8,6 +8,82 @@
  * @package Quezon_Care
  */
 
+/**
+ * Display default booking form when Contact Form 7 is not available
+ */
+if (!function_exists('quezon_care_display_default_booking_form')) {
+    function quezon_care_display_default_booking_form() {
+        ?>
+        <form class="booking-form" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+            <input type="hidden" name="action" value="quezon_care_booking">
+            <?php wp_nonce_field('quezon_care_booking_nonce', 'booking_nonce'); ?>
+            
+            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label for="full_name"><?php esc_html_e('Full Name', 'quezon-care'); ?> <span class="required">*</span></label>
+                    <input type="text" id="full_name" name="full_name" placeholder="Your Full Name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email"><?php esc_html_e('Email Address', 'quezon-care'); ?> <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+            </div>
+            
+            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label for="phone"><?php esc_html_e('Phone Number', 'quezon-care'); ?> <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="+63 917 123 4567" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                </div>
+                <div class="form-group">
+                    <label for="service"><?php esc_html_e('Service Interested In', 'quezon-care'); ?> <span class="required">*</span></label>
+                    <select id="service" name="service" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                        <option value="nursing-care"><?php esc_html_e('Nursing Care', 'quezon-care'); ?></option>
+                        <option value="elderly-companion"><?php esc_html_e('Elderly Companion', 'quezon-care'); ?></option>
+                        <option value="post-surgery"><?php esc_html_e('Post-Surgery Recovery', 'quezon-care'); ?></option>
+                        <option value="dementia-care"><?php esc_html_e('Dementia/Alzheimer\'s Care', 'quezon-care'); ?></option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group">
+                    <label for="start_date"><?php esc_html_e('Preferred Start Date', 'quezon-care'); ?></label>
+                    <input type="date" id="start_date" name="start_date" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" min="<?php echo date('Y-m-d'); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="frequency"><?php esc_html_e('Care Frequency', 'quezon-care'); ?></label>
+                    <select id="frequency" name="frequency" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                        <option value="full-time"><?php esc_html_e('Full-time (24/7)', 'quezon-care'); ?></option>
+                        <option value="part-time"><?php esc_html_e('Part-time', 'quezon-care'); ?></option>
+                        <option value="weekends"><?php esc_html_e('Weekends Only', 'quezon-care'); ?></option>
+                        <option value="as-needed"><?php esc_html_e('As Needed', 'quezon-care'); ?></option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes"><?php esc_html_e('Additional Notes', 'quezon-care'); ?></label>
+                <textarea id="notes" name="notes" rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="<?php esc_attr_e('Tell us about your care needs, the patient\'s condition, or any questions you have...', 'quezon-care'); ?>"></textarea>
+            </div>
+            
+            <div class="form-group" style="margin-top: 1rem;">
+                <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" name="privacy" required style="margin-top: 4px;">
+                    <span class="text-sm text-gray-600">
+                        <?php printf(esc_html__('I agree to the %1$sPrivacy Policy%2$s and consent to be contacted *', 'quezon-care'), '<a href="' . esc_url(home_url('/privacy-policy/')) . '" class="text-blue-600 hover:underline">', '</a>'); ?>
+                    </span>
+                </label>
+            </div>
+            
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold py-4 px-8 rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 mt-6">
+                <?php esc_html_e('Book My Free Consultation', 'quezon-care'); ?>
+            </button>
+        </form>
+        <?php
+    }
+}
+
 get_header();
 
 $phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
@@ -112,93 +188,6 @@ $phone = quezon_care_get_option('phone', '+63 (02) 8123-4567');
         </div>
     </div>
 </section>
-
-<?php
-/**
- * Display default booking form when Contact Form 7 is not available
- */
-function quezon_care_display_default_booking_form() {
-    ?>
-    <form class="booking-form" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-        <input type="hidden" name="action" value="quezon_care_booking">
-        <?php wp_nonce_field('quezon_care_booking_nonce', 'booking_nonce'); ?>
-        
-        <div class="form-group">
-            <label for="full_name">
-                <?php esc_html_e('Full Name', 'quezon-care'); ?>
-                <span class="required">*</span>
-            </label>
-            <input type="text" id="full_name" name="full_name" required class="wpcf7-form-control">
-        </div>
-        
-        <div class="form-group">
-            <label for="email">
-                <?php esc_html_e('Email Address', 'quezon-care'); ?>
-                <span class="required">*</span>
-            </label>
-            <input type="email" id="email" name="email" required class="wpcf7-form-control">
-        </div>
-        
-        <div class="form-group">
-            <label for="phone">
-                <?php esc_html_e('Phone Number', 'quezon-care'); ?>
-                <span class="required">*</span>
-            </label>
-            <input type="tel" id="phone" name="phone" required class="wpcf7-form-control">
-        </div>
-        
-        <div class="form-group">
-            <label for="service">
-                <?php esc_html_e('Service Interested In', 'quezon-care'); ?>
-                <span class="required">*</span>
-            </label>
-            <select id="service" name="service" required class="wpcf7-form-control">
-                <option value=""><?php esc_html_e('Select a service...', 'quezon-care'); ?></option>
-                <option value="nursing-care"><?php esc_html_e('Nursing Care', 'quezon-care'); ?></option>
-                <option value="elderly-companion"><?php esc_html_e('Elderly Companion', 'quezon-care'); ?></option>
-                <option value="post-surgery"><?php esc_html_e('Post-Surgery Recovery', 'quezon-care'); ?></option>
-                <option value="dementia-care"><?php esc_html_e('Dementia/Alzheimer\'s Care', 'quezon-care'); ?></option>
-                <option value="other"><?php esc_html_e('Other', 'quezon-care'); ?></option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label for="start_date">
-                <?php esc_html_e('Care Start Date', 'quezon-care'); ?>
-            </label>
-            <input type="date" id="start_date" name="start_date" class="wpcf7-form-control" min="<?php echo date('Y-m-d'); ?>">
-        </div>
-        
-        <div class="form-group">
-            <label for="notes">
-                <?php esc_html_e('Additional Notes', 'quezon-care'); ?>
-            </label>
-            <textarea id="notes" name="notes" rows="4" class="wpcf7-form-control wpcf7-textarea" placeholder="<?php esc_attr_e('Tell us about your care needs, schedule preferences, or any questions you have...', 'quezon-care'); ?>"></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label class="wpcf7-acceptance" style="display: flex; align-items: flex-start; gap: 0.5rem;">
-                <input type="checkbox" name="privacy" required style="margin-top: 4px;">
-                <span>
-                    <?php
-                    printf(
-                        esc_html__('I agree to the %1$sPrivacy Policy%2$s and consent to being contacted about care services.', 'quezon-care'),
-                        '<a href="' . esc_url(home_url('/privacy-policy/')) . '">',
-                        '</a>'
-                    );
-                    ?>
-                    <span class="required">*</span>
-                </span>
-            </label>
-        </div>
-        
-        <button type="submit" class="wpcf7-submit">
-            <i class="fas fa-paper-plane"></i>
-            <?php esc_html_e('Submit Request', 'quezon-care'); ?>
-        </button>
-    </form>
-    <?php
-}
 
 get_footer();
 ?>
